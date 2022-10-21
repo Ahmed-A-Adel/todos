@@ -7,7 +7,7 @@ const TodoForm = forwardRef(({}, ref) => {
   // _________ Varibales _________________________________
   const { todosState, inputState } = useContext(TodosContext);
   const { addTodo } = todosState;
-  const [value, handleChange, reset] = inputState;
+  const [value, handleChange, reset, showValue, label, setLabel] = inputState;
   // const [value, handleChange, reset] = useStatedInput();
   // _________ End Of Varibales _________________________________
   return (
@@ -22,7 +22,7 @@ const TodoForm = forwardRef(({}, ref) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addTodo(value);
+          addTodo(value, setLabel);
           reset();
         }}
       >
@@ -31,7 +31,7 @@ const TodoForm = forwardRef(({}, ref) => {
           onChange={handleChange}
           fullWidth
           margin="normal"
-          label="Add a new todo"
+          label={label}
           ref={ref}
           autoFocus={true}
         />

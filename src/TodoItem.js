@@ -9,11 +9,11 @@ import {
 } from "@material-ui/core";
 
 function TodoItem({ todo, removeTodo, editTodo, checkTodo, inputState }) {
-  const setValue = inputState[3];
+  const [a, b, c, showValue, label, setLabel] = inputState;
   // _______________ Event Handlers __________________________
   const handleDelete = () => removeTodo(todo.id);
   //   ___________________________________________
-  const handleEdit = () => editTodo(todo.id, setValue);
+  const handleEdit = () => editTodo(todo.id, showValue, setLabel);
   //   ___________________________________________
   const handleCheck = () => checkTodo(todo.id);
   //   _____________ End Of Event Handlers ___________________

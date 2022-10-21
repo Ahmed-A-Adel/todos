@@ -5,14 +5,14 @@ function useTodoState(initialState, input) {
   const [todos, setTodos] = useLocalStorageState("todos", initialState);
   return {
     todos,
-    addTodo: (value) => {
+    addTodo: (value, setLabel) => {
       if (todos.some((todo) => todo.edit)) {
         setTodos(
           todos.map((todo) =>
             todo.edit ? { ...todo, task: value, edit: false } : todo
           )
         );
-        input.current.children[0].innerText = "Add New Todo";
+        setLabel("Add New Todo");
       } else {
         setTodos([
           ...todos,
@@ -24,22 +24,26 @@ function useTodoState(initialState, input) {
       const newTodos = todos.filter((todo) => todo.id !== id);
       setTodos(newTodos);
     },
-    editTodo: (id, setInput) => {
+    editTodo: (id, setInput, setLabel) => {
       const newTodos = todos.map((todo) => {
         // ________________________________________________________
         if (todo.id === id && !todo.edit) {
           // --------------------------------------------------
           input.current.children[1].children[0].focus();
           // --------------------------------------------------
-          input.current.children[0].innerText = "Edit Todo Name";
+          setLabel("Edit Todo Name");
           // --------------------------------------------------
+          // input.current.children[0].innerText = "Edit Todo Name";
+          // // --------------------------------------------------
           setInput(todo.task);
           // --------------------------------------------------
           return { ...todo, edit: true };
           // ________________________________________________________
         } else if (todo.id === id && todo.edit) {
           // --------------------------------------------------
-          input.current.children[0].innerText = "Add New Todo";
+          // input.current.children[0].innerText = "Add New Todo";
+          // --------------------------------------------------
+          setLabel("Add New Todo");
           // --------------------------------------------------
           setInput("");
           // --------------------------------------------------
