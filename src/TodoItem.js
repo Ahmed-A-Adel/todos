@@ -8,11 +8,12 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 
-function TodoItem({ todo, removeTodo, editTodo, checkTodo }) {
+function TodoItem({ todo, removeTodo, editTodo, checkTodo, inputState }) {
+  const setValue = inputState[3];
   // _______________ Event Handlers __________________________
   const handleDelete = () => removeTodo(todo.id);
   //   ___________________________________________
-  const handleEdit = () => editTodo(todo.id);
+  const handleEdit = () => editTodo(todo.id, setValue);
   //   ___________________________________________
   const handleCheck = () => checkTodo(todo.id);
   //   _____________ End Of Event Handlers ___________________

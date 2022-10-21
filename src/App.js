@@ -1,9 +1,12 @@
-import "./App.css";
 import TodoApp from "./TodoApp";
+import TodosProvider from "./contex/todos.context";
+
 function App() {
   return (
     <div className="App">
-      <TodoApp />
+      <TodosProvider>
+        <TodoApp />
+      </TodosProvider>
     </div>
   );
 }

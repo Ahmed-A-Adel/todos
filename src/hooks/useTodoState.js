@@ -6,13 +6,14 @@ function useTodoState(initialState, input) {
   return {
     todos,
     addTodo: (value) => {
-      if (todos.some((todo) => todo.edit))
+      if (todos.some((todo) => todo.edit)) {
         setTodos(
           todos.map((todo) =>
-            todo.edit ? { ...todo, task: value, edit: !todo.edit } : todo
+            todo.edit ? { ...todo, task: value, edit: false } : todo
           )
         );
-      else {
+        input.current.children[0].innerText = "Add New Todo";
+      } else {
         setTodos([
           ...todos,
           { task: value, id: uuidv4(), complated: false, edit: false },
@@ -23,7 +24,7 @@ function useTodoState(initialState, input) {
       const newTodos = todos.filter((todo) => todo.id !== id);
       setTodos(newTodos);
     },
-    editTodo: (id) => {
+    editTodo: (id, setInput) => {
       const newTodos = todos.map((todo) => {
         // ________________________________________________________
         if (todo.id === id && !todo.edit) {
@@ -32,11 +33,15 @@ function useTodoState(initialState, input) {
           // --------------------------------------------------
           input.current.children[0].innerText = "Edit Todo Name";
           // --------------------------------------------------
+          setInput(todo.task);
+          // --------------------------------------------------
           return { ...todo, edit: true };
           // ________________________________________________________
         } else if (todo.id === id && todo.edit) {
           // --------------------------------------------------
           input.current.children[0].innerText = "Add New Todo";
+          // --------------------------------------------------
+          setInput("");
           // --------------------------------------------------
           return { ...todo, edit: false };
           // ________________________________________________________

@@ -1,9 +1,15 @@
 import React, { forwardRef } from "react";
 import { Paper, TextField } from "@material-ui/core";
 import useStatedInput from "./hooks/useStatedInput";
-
-const TodoForm = forwardRef(({ addTodo }, ref) => {
-  const [value, handleChange, reset] = useStatedInput();
+import { useContext } from "react";
+import { TodosContext } from "./contex/todos.context";
+const TodoForm = forwardRef(({}, ref) => {
+  // _________ Varibales _________________________________
+  const { todosState, inputState } = useContext(TodosContext);
+  const { addTodo } = todosState;
+  const [value, handleChange, reset] = inputState;
+  // const [value, handleChange, reset] = useStatedInput();
+  // _________ End Of Varibales _________________________________
   return (
     <Paper
       style={{
@@ -27,7 +33,7 @@ const TodoForm = forwardRef(({ addTodo }, ref) => {
           margin="normal"
           label="Add a new todo"
           ref={ref}
-          autoFocus
+          autoFocus={true}
         />
       </form>
     </Paper>
