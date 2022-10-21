@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 
 function TodoItem({ todo, removeTodo, editTodo, checkTodo, inputState }) {
-  const [a, b, c, showValue, label, setLabel] = inputState;
+  const { showValue, setLabel } = inputState;
   // _______________ Event Handlers __________________________
   const handleDelete = () => removeTodo(todo.id);
   //   ___________________________________________
