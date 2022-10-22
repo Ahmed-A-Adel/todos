@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import { Delete, Edit } from "@material-ui/icons";
 import {
@@ -7,9 +7,13 @@ import {
   Checkbox,
   ListItemSecondaryAction,
 } from "@material-ui/core";
+import { InputContext } from "./contex/input.context";
+import { TodosContext } from "./contex/todos.context";
 
-function TodoItem({ todo, removeTodo, editTodo, checkTodo, inputState }) {
-  const { showValue, setLabel } = inputState;
+function TodoItem({ todo }) {
+  const { showValue, setLabel } = useContext(InputContext);
+  const { todosState } = useContext(TodosContext);
+  const { removeTodo, editTodo, checkTodo } = todosState;
   // _______________ Event Handlers __________________________
   const handleDelete = () => removeTodo(todo.id);
   //   ___________________________________________

@@ -2,11 +2,14 @@ import React, { forwardRef } from "react";
 import { Paper, TextField } from "@material-ui/core";
 import { useContext } from "react";
 import { TodosContext } from "./contex/todos.context";
+import { InputContext } from "./contex/input.context";
+
 const TodoForm = forwardRef(({}, ref) => {
   // _________ Varibales _________________________________
-  const { todosState, inputState } = useContext(TodosContext);
+  const { todosState } = useContext(TodosContext);
+  const { label, setLabel, reset, value, handleChange } =
+    useContext(InputContext);
   const { addTodo } = todosState;
-  const { value, handleChange, reset, label, setLabel } = inputState;
   // _________ End Of Varibales _________________________________
   return (
     <Paper

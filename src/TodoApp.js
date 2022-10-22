@@ -4,6 +4,7 @@ import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import { useContext } from "react";
 import { TodosContext } from "./contex/todos.context";
+import InputProvider from "./contex/input.context";
 function TodoApp() {
   // ___________________ Varibales _______________________________________________
 
@@ -28,8 +29,10 @@ function TodoApp() {
       </AppBar>
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
-          <TodoForm addTodo={addTodo} ref={foucsInput} />
-          <TodoList />
+          <InputProvider>
+            <TodoForm addTodo={addTodo} ref={foucsInput} />
+            <TodoList />
+          </InputProvider>
         </Grid>
       </Grid>
     </Paper>

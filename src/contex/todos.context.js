@@ -1,5 +1,4 @@
 import React, { createContext, createRef } from "react";
-import useStatedInput from "../hooks/useStatedInput";
 import useTodoState from "../hooks/useTodoState";
 export const TodosContext = createContext();
 
@@ -16,10 +15,9 @@ const TodosProvider = (props) => {
     },
   ];
   const todosState = useTodoState(initialState, foucsInput);
-  const inputState = useStatedInput("");
   // _________ Varibales ______________________
   return (
-    <TodosContext.Provider value={{ todosState, foucsInput, inputState }}>
+    <TodosContext.Provider value={{ todosState, foucsInput }}>
       {props.children}
     </TodosContext.Provider>
   );

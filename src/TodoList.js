@@ -5,21 +5,15 @@ import { TodosContext } from "./contex/todos.context";
 import TodoItem from "./TodoItem";
 
 function TodoList() {
-  const { todosState, inputState } = useContext(TodosContext);
-  const { todos, removeTodo, editTodo, checkTodo } = todosState;
+  const { todosState } = useContext(TodosContext);
+  const { todos } = todosState;
   if (todos.length)
     return (
       <Paper>
         <List>
           {todos.map((todo, i) => (
             <div key={todo.id}>
-              <TodoItem
-                todo={todo}
-                removeTodo={removeTodo}
-                editTodo={editTodo}
-                checkTodo={checkTodo}
-                inputState={inputState}
-              />
+              <TodoItem todo={todo} />
               {i < todos.length - 1 && <Divider />}
             </div>
           ))}
