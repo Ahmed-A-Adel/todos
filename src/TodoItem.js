@@ -11,15 +11,22 @@ import { InputContext } from "./contex/input.context";
 import { TodosContext } from "./contex/todos.context";
 
 function TodoItem({ todo }) {
-  const { showValue, setLabel } = useContext(InputContext);
-  const { todosState } = useContext(TodosContext);
-  const { removeTodo, editTodo, checkTodo } = todosState;
+  const { showValue } = useContext(InputContext);
+  const { dispatch, foucsInput } = useContext(TodosContext);
+
   // _______________ Event Handlers __________________________
-  const handleDelete = () => removeTodo(todo.id);
+  const handleDelete = () => dispatch({ type: "REMOVE", id: todo.id });
   //   ___________________________________________
-  const handleEdit = () => editTodo(todo.id, showValue, setLabel);
+  const handleEdit = () => {
+    dispatch({
+      type: "EDIT",
+      id: todo.id,
+      input: foucsInput,
+      setInput: showValue,
+    });
+  };
   //   ___________________________________________
-  const handleCheck = () => checkTodo(todo.id);
+  const handleCheck = () => dispatch({ type: "CHECK", id: todo.id });
   //   _____________ End Of Event Handlers ___________________
   return (
     <ListItem>

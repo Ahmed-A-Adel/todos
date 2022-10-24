@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React from "react";
 import { Toolbar, Typography, Grid, AppBar, Paper } from "@material-ui/core";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
@@ -8,8 +8,7 @@ import InputProvider from "./contex/input.context";
 function TodoApp() {
   // ___________________ Varibales _______________________________________________
 
-  const { todosState, foucsInput } = useContext(TodosContext);
-  const { addTodo } = todosState;
+  const { foucsInput } = useContext(TodosContext);
   // ___________________ End Of Varibales ________________________________________
 
   return (
@@ -30,7 +29,7 @@ function TodoApp() {
       <Grid container justifyContent="center" style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
           <InputProvider>
-            <TodoForm addTodo={addTodo} ref={foucsInput} />
+            <TodoForm ref={foucsInput} />
             <TodoList />
           </InputProvider>
         </Grid>

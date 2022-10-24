@@ -1,11 +1,12 @@
 import React, { createContext, createRef } from "react";
 import useTodoState from "../hooks/useTodoState";
+import todoReducer from "../reducers/todo.reducer";
+import { useReducer } from "react";
 export const TodosContext = createContext();
 
 const TodosProvider = (props) => {
   // _________ Varibales ______________________
   const foucsInput = createRef();
-
   const initialState = [
     {
       task: "Read The Secert Gaurdn",
@@ -14,10 +15,12 @@ const TodosProvider = (props) => {
       complated: false,
     },
   ];
-  const todosState = useTodoState(initialState, foucsInput);
+  const [todos, dispatch] = useReducer(todoReducer, initialState);
+
+  // const todosState = useTodoState(initialState, foucsInput);
   // _________ Varibales ______________________
   return (
-    <TodosContext.Provider value={{ todosState, foucsInput }}>
+    <TodosContext.Provider value={{ todos, dispatch, foucsInput }}>
       {props.children}
     </TodosContext.Provider>
   );

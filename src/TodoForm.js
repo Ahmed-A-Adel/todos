@@ -6,10 +6,11 @@ import { InputContext } from "./contex/input.context";
 
 const TodoForm = forwardRef(({}, ref) => {
   // _________ Varibales _________________________________
-  const { todosState } = useContext(TodosContext);
-  const { label, setLabel, reset, value, handleChange } =
-    useContext(InputContext);
-  const { addTodo } = todosState;
+  const { dispatch, todos } = useContext(TodosContext);
+  const { reset, value, handleChange } = useContext(InputContext);
+  const foucs = todos.some((todo) => todo.edit);
+  const label = foucs ? "Edit Todo" : "Add New Todo";
+
   // _________ End Of Varibales _________________________________
   return (
     <Paper
@@ -23,7 +24,7 @@ const TodoForm = forwardRef(({}, ref) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addTodo(value, setLabel);
+          dispatch({ type: "ADD", task: value });
           reset();
         }}
       >
@@ -35,6 +36,7 @@ const TodoForm = forwardRef(({}, ref) => {
           label={label}
           ref={ref}
           autoFocus
+          focused={foucs}
         />
       </form>
     </Paper>
