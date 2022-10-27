@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import { Delete, Edit } from "@material-ui/icons";
 import {
@@ -14,6 +14,7 @@ function TodoItem({ todo }) {
   const { showValue } = useContext(InputContext);
   const { foucsInput } = useContext(TodosContext);
   const dispatch = useContext(DispatchContext);
+  console.log(todo);
 
   // _______________ Event Handlers __________________________
   const handleDelete = () => dispatch({ type: "REMOVE", id: todo.id });
@@ -49,4 +50,4 @@ function TodoItem({ todo }) {
   );
 }
 
-export default TodoItem;
+export default memo(TodoItem);
