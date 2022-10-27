@@ -2,15 +2,16 @@ import React, { forwardRef } from "react";
 import { Paper, TextField } from "@material-ui/core";
 import { useContext } from "react";
 import { TodosContext } from "./contex/todos.context";
+import { DispatchContext } from "./contex/todos.context";
 import { InputContext } from "./contex/input.context";
 
 const TodoForm = forwardRef(({}, ref) => {
   // _________ Varibales _________________________________
-  const { dispatch, todos } = useContext(TodosContext);
+  const { todos } = useContext(TodosContext);
+  const dispatch = useContext(DispatchContext);
   const { reset, value, handleChange } = useContext(InputContext);
   const foucs = todos.some((todo) => todo.edit);
   const label = foucs ? "Edit Todo" : "Add New Todo";
-
   // _________ End Of Varibales _________________________________
   return (
     <Paper
@@ -35,8 +36,7 @@ const TodoForm = forwardRef(({}, ref) => {
           margin="normal"
           label={label}
           ref={ref}
-          autoFocus
-          focused={foucs}
+          autoFocus={true}
         />
       </form>
     </Paper>

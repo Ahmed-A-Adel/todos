@@ -3,6 +3,7 @@ import useTodoState from "../hooks/useTodoState";
 import todoReducer from "../reducers/todo.reducer";
 import { useReducer } from "react";
 export const TodosContext = createContext();
+export const DispatchContext = createContext();
 
 const TodosProvider = (props) => {
   // _________ Varibales ______________________
@@ -16,12 +17,15 @@ const TodosProvider = (props) => {
     },
   ];
   const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const state = { todos, foucsInput };
 
   // const todosState = useTodoState(initialState, foucsInput);
   // _________ Varibales ______________________
   return (
-    <TodosContext.Provider value={{ todos, dispatch, foucsInput }}>
-      {props.children}
+    <TodosContext.Provider value={state}>
+      <DispatchContext.Provider value={dispatch}>
+        {props.children}
+      </DispatchContext.Provider>
     </TodosContext.Provider>
   );
 };

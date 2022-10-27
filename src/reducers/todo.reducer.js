@@ -17,7 +17,6 @@ export default function todoReducer(state, action) {
               edit: false,
             },
           ];
-
     // _____________________ END OF ADD TODO ___________________________________
 
     // _____________________ REMOVE Todo _______________________________________
@@ -47,6 +46,7 @@ export default function todoReducer(state, action) {
         } else if (todo.id === action.id && todo.edit) {
           // --------------------------------------------------
           action.setInput("");
+
           // --------------------------------------------------
           return { ...todo, edit: false };
           // ________________________________________________________

@@ -8,11 +8,12 @@ import {
   ListItemSecondaryAction,
 } from "@material-ui/core";
 import { InputContext } from "./contex/input.context";
-import { TodosContext } from "./contex/todos.context";
+import { DispatchContext, TodosContext } from "./contex/todos.context";
 
 function TodoItem({ todo }) {
   const { showValue } = useContext(InputContext);
-  const { dispatch, foucsInput } = useContext(TodosContext);
+  const { foucsInput } = useContext(TodosContext);
+  const dispatch = useContext(DispatchContext);
 
   // _______________ Event Handlers __________________________
   const handleDelete = () => dispatch({ type: "REMOVE", id: todo.id });

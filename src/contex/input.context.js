@@ -5,8 +5,8 @@ function InputProvider(props) {
   const reset = () => setValue("");
   const handleChange = (e) => setValue(e.target.value);
   const showValue = (inputVal) => setValue(inputVal);
-
   const state = { value, handleChange, reset, showValue };
+
   return (
     <InputContext.Provider value={state}>
       {props.children}
