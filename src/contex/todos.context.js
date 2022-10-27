@@ -1,7 +1,6 @@
 import React, { createContext, createRef } from "react";
-import useTodoState from "../hooks/useTodoState";
+import { useLocalStorageReducer } from "../hooks/useLocalStorageReducer";
 import todoReducer from "../reducers/todo.reducer";
-import { useReducer } from "react";
 export const TodosContext = createContext();
 export const DispatchContext = createContext();
 
@@ -16,10 +15,13 @@ const TodosProvider = (props) => {
       complated: false,
     },
   ];
-  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatch] = useLocalStorageReducer(
+    "todos",
+    initialState,
+    todoReducer
+  );
   const state = { todos, foucsInput };
 
-  // const todosState = useTodoState(initialState, foucsInput);
   // _________ Varibales ______________________
   return (
     <TodosContext.Provider value={state}>
